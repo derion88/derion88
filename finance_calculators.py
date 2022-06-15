@@ -1,39 +1,42 @@
+# This program will allow a user to calculate investment interest rates and home loan interest rates
+#Importing module
 import math
 
-# This program will allow a user to calculate investment interest rates and home loan interest rates
-# Collecting user data
+
+# First the user is asked to chose between an investment of bond
+# then making sure the user types in correct input
+# If the user chooses the option "investment",
+# They are first asked to choose an interest rate
 choice = input('''Please choose either \'investment' or \'bond' from the menu below to proceed: \n 
 investment           - to calculate the amount of interest you'll earn in interest
 bond                 - to calculate the amount you'll have to pay on a home loan
 \nEnter your choice here: ''')
-
-
 choice = choice.lower()
 if not choice == "bond" and not choice == "investment":
     print("Please enter either: \"investment\" or \"bond.\" ")
-
 if choice == "investment":
     P = float(input("Please enter the amount you would like to deposit: R"))
     r = float(input("Please enter the interest rate here: "))
     t = int(input("For how many years would you like to invest this amount? "))
     interest = input("Please indicate if you would like \"simple\" or \"compound\" interest on this amount: ")
 
-    # Calculating total simple interest
+    # if the user chooses the option "simple",
+    # the simple interest on their investment amount is calculated
+    #  Secondly calculating total compound interest and printing output
     interest = interest.lower()
     if interest == "simple":
         r = r/100
         A = round(P*(1 + r * t), 2)
         total_inter = round((P * r * t), 2)
         print(f'\nFor this investment you will make R{total_inter} in simple interest and a total of R{A}.')
-
-    # Calculating total compound interest
     if interest == "compound":
         r = r/100
         A = round(P * math.pow((1 + r), t), 2)
         comp_amount = round((A - P), 2)
         print(f'\nFor this investment you will make R{comp_amount} in compound interest and total amount of R{A}.')
 
-
+# If the user chooses the option "bond",
+# the following questions will be asked
 if choice == "bond":
     P = float(input("\nPlease enter the present value of the house: R"))
     i = float(input("What is the current interest rate of the house: "))
@@ -43,11 +46,9 @@ if choice == "bond":
 # I looked up the following formula on the website indicated below
 # https://medium.com/swlh/simple-mortgage-calculator-with-python-and-excel-b98dede36720
 # Formula in example didn't seem to work, compared to other calculators on the web
-
     i = (i/100)/12
     amount_1 = i * ((1 + i)**n)
     amount_2 = (1 + i)**n-1
     x = round(P*(amount_1/amount_2), 2)
     print(f"\nFor this bond your monthly repayment will be R{x}.")
-
 print("\nThank you :)")
